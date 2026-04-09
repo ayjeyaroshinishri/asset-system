@@ -1,16 +1,23 @@
 const express = require("express");
 const app = express();
 
-let assets = ["Laptop","Chair"];
+app.use(express.json());
+
+let assets = ["Laptop","Mouse","Keyboard"];
 
 app.get("/", (req,res)=>{
-    res.send("Asset System V2 - View Assets");
+    res.send("✅ Asset System V3 - Delete Asset");
 });
 
 app.get("/view",(req,res)=>{
     res.json(assets);
 });
 
-app.listen(3002, ()=>{
-    console.log("Running V2");
+app.delete("/delete/:id",(req,res)=>{
+    assets.splice(req.params.id,1);
+    res.send("Asset Deleted");
+});
+
+app.listen(3003, ()=>{
+    console.log("V3 running on port 3003");
 });
